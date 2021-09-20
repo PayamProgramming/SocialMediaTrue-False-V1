@@ -31,8 +31,6 @@ public class DeleteAccountFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jLabel1.setText("Are You Sure About Deleting Your Account ?");
 
         jButton1.setText("Yes");

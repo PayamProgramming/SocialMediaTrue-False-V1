@@ -38,7 +38,7 @@ public class MyPostsFrame extends javax.swing.JFrame {
 
             connect.close();
             ps.close();
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
             e.printStackTrace();
@@ -90,6 +90,11 @@ public class MyPostsFrame extends javax.swing.JFrame {
         table.setRowMargin(2);
         table.setSelectionForeground(new java.awt.Color(255, 255, 153));
         table.getTableHeader().setReorderingAllowed(false);
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table);
         if (table.getColumnModel().getColumnCount() > 0) {
             table.getColumnModel().getColumn(0).setResizable(false);
@@ -98,6 +103,8 @@ public class MyPostsFrame extends javax.swing.JFrame {
             table.getColumnModel().getColumn(1).setHeaderValue("Date");
         }
 
+        btn_refresh.setBackground(new java.awt.Color(0, 0, 0));
+        btn_refresh.setForeground(new java.awt.Color(152, 122, 64));
         btn_refresh.setText("Refresh Posts");
         btn_refresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +112,8 @@ public class MyPostsFrame extends javax.swing.JFrame {
             }
         });
 
+        btn_newpost.setBackground(new java.awt.Color(0, 0, 0));
+        btn_newpost.setForeground(new java.awt.Color(152, 122, 64));
         btn_newpost.setText("New Post");
         btn_newpost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +121,8 @@ public class MyPostsFrame extends javax.swing.JFrame {
             }
         });
 
+        btn_delete.setBackground(new java.awt.Color(0, 0, 0));
+        btn_delete.setForeground(new java.awt.Color(152, 122, 64));
         btn_delete.setText("Delete Post");
         btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,15 +192,25 @@ public class MyPostsFrame extends javax.swing.JFrame {
             MyPostsFrame mpf = new MyPostsFrame();
             mpf.show();
             this.hide();
-            
+
             connect.close();
             ps.close();
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No File Has Selected", "Warning", 2);
             e.printStackTrace();
         }
     }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int selectedRow = table.getSelectedRow();
+        String username = LogInFrame.UN;
+        String post = model.getValueAt(selectedRow, 0).toString();
+        String date = model.getValueAt(selectedRow, 1).toString();
+        PostFrame pf = new PostFrame(username, post, date);
+        pf.show();
+    }//GEN-LAST:event_tableMouseClicked
 
     /**
      * @param args the command line arguments
